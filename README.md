@@ -47,7 +47,7 @@ The app maintains your original text while streaming corrections in real-time, c
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/cascade-edit.git
+   git clone https://github.com/MushroomFleet/cascade-edit
    cd cascade-edit
    ```
 
@@ -209,11 +209,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Phase 2: Animation & UX](docs/phase-2-animation-ux.md) - Polish and animations
 
 ---
-
-## 📧 Contact & Support
-
-- **Issues:** [GitHub Issues](https://github.com/yourusername/cascade-edit/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/yourusername/cascade-edit/discussions)
 
 ---
 
