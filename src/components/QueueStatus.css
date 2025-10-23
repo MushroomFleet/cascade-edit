@@ -1,0 +1,61 @@
+.queue-status {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.queue-status-content {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  color: white;
+}
+
+.queue-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.queue-stat-icon {
+  font-size: 20px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.queue-stat-icon.processing {
+  animation: spin 1s linear infinite;
+}
+
+.queue-stat-label {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.queue-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 2px 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
