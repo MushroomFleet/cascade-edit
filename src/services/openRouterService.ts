@@ -33,14 +33,16 @@ class OpenRouterService {
    * Process text with streaming response
    * @param text - The text to process
    * @param onChunk - Callback for each text chunk received
+   * @param model - The model to use (optional, defaults to config default)
    * @returns Promise that resolves when streaming is complete
    */
   async processTextStream(
     text: string,
-    onChunk: (chunk: string) => void
+    onChunk: (chunk: string) => void,
+    model?: string
   ): Promise<void> {
     const requestBody: OpenRouterRequest = {
-      model: API_CONFIG.model,
+      model: model || API_CONFIG.defaultModel,
       stream: true,
       messages: [
         {
@@ -116,11 +118,12 @@ class OpenRouterService {
   /**
    * Process text without streaming (fallback)
    * @param text - The text to process
+   * @param model - The model to use (optional, defaults to config default)
    * @returns The corrected text
    */
-  async processText(text: string): Promise<string> {
+  async processText(text: string, model?: string): Promise<string> {
     const requestBody: OpenRouterRequest = {
-      model: API_CONFIG.model,
+      model: model || API_CONFIG.defaultModel,
       stream: false,
       messages: [
         {

@@ -1,12 +1,14 @@
 // Paragraph status enum
-export enum ParagraphStatus {
-  WRITING = 'writing',
-  QUEUED = 'queued',      // NEW: Added to queue
-  PROCESSING = 'processing',
-  STREAMING = 'streaming', // NEW: Actively receiving stream
-  COMPLETED = 'completed',
-  ERROR = 'error'
-}
+export const ParagraphStatus = {
+  WRITING: 'writing',
+  QUEUED: 'queued',      // NEW: Added to queue
+  PROCESSING: 'processing',
+  STREAMING: 'streaming', // NEW: Actively receiving stream
+  COMPLETED: 'completed',
+  ERROR: 'error'
+} as const;
+
+export type ParagraphStatus = typeof ParagraphStatus[keyof typeof ParagraphStatus];
 
 // Paragraph data structure
 export interface Paragraph {
@@ -62,4 +64,28 @@ export interface AppState {
   paragraphs: Paragraph[];
   currentText: string;
   queue: QueueState;
+}
+
+// Mode types
+export type AppMode = 'single' | 'compare';
+
+// Multi-model comparison types
+export interface ModelOutput {
+  modelName: string;
+  text: string;
+  status: ParagraphStatus;
+  error?: string;
+  streamProgress?: number;
+}
+
+export interface ComparisonResult {
+  id: string;
+  originalText: string;
+  timestamp: number;
+  outputs: {
+    model1: ModelOutput;
+    model2: ModelOutput;
+    model3: ModelOutput;
+    model4: ModelOutput;
+  };
 }

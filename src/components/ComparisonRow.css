@@ -1,0 +1,33 @@
+.comparison-row {
+  margin-bottom: 24px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.comparison-row-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1200px) {
+  .comparison-row-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .comparison-row-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

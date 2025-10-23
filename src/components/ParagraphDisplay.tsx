@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Paragraph, ParagraphStatus } from '../types';
+import type { Paragraph } from '../types';
+import { ParagraphStatus } from '../types';
 import { AnimatedText } from './AnimatedText';
+import { copyToClipboard } from '../utils/clipboardUtils';
 import './ParagraphDisplay.css';
 
 interface ParagraphDisplayProps {
@@ -10,6 +12,15 @@ interface ParagraphDisplayProps {
 export const ParagraphDisplay: React.FC<ParagraphDisplayProps> = ({ paragraph }) => {
   const [showOriginal, setShowOriginal] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    const success = await copyToClipboard(paragraph.correctedText);
+    if (success) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   useEffect(() => {
     // Start transition when streaming begins
@@ -64,6 +75,16 @@ export const ParagraphDisplay: React.FC<ParagraphDisplayProps> = ({ paragraph })
 
   return (
     <div className={`paragraph ${getStatusClass()}`} data-paragraph-id={paragraph.id}>
+      {paragraph.status === ParagraphStatus.COMPLETED && paragraph.correctedText && (
+        <button
+          className="copy-button-paragraph"
+          onClick={handleCopy}
+          title={copied ? 'Copied!' : 'Copy to clipboard'}
+          aria-label="Copy to clipboard"
+        >
+          {copied ? '✓' : '📋'}
+        </button>
+      )}
       <div className={`paragraph-content ${isTransitioning ? 'fading-out' : ''}`}>
         {!showOriginal && shouldAnimate ? (
           <AnimatedText 

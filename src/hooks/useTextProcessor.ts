@@ -1,16 +1,23 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { Paragraph, ParagraphStatus, QueueItem } from '../types';
+import type { Paragraph, QueueItem } from '../types';
+import { ParagraphStatus } from '../types';
 import { openRouterService } from '../services/openRouterService';
 import { queueManager } from '../services/queueManager';
 import { scrollToBottom } from '../utils/scrollUtils';
 
-export function useTextProcessor() {
+export function useTextProcessor(model?: string) {
   const [paragraphs, setParagraphs] = useState<Paragraph[]>([]);
   const [currentText, setCurrentText] = useState('');
   const [queueLength, setQueueLength] = useState(0);
   const [processingCount, setProcessingCount] = useState(0);
   
   const paragraphsRef = useRef<Paragraph[]>([]);
+  const modelRef = useRef(model);
+
+  // Keep model ref in sync
+  useEffect(() => {
+    modelRef.current = model;
+  }, [model]);
 
   // Keep ref in sync with state
   useEffect(() => {
@@ -43,7 +50,7 @@ export function useTextProcessor() {
     let accumulatedText = '';
 
     try {
-      // Use streaming to process text
+      // Use streaming to process text with selected model
       await openRouterService.processTextStream(
         item.text,
         (chunk: string) => {
@@ -54,7 +61,8 @@ export function useTextProcessor() {
             correctedText: accumulatedText,
             status: ParagraphStatus.STREAMING,
           });
-        }
+        },
+        modelRef.current
       );
 
       // Mark as completed

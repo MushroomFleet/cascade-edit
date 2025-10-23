@@ -1,0 +1,64 @@
+.compare-settings {
+  background: var(--bg-tertiary);
+  border-bottom: 2px solid var(--border-primary);
+  padding: 20px 32px;
+  box-shadow: var(--shadow-sm);
+}
+
+.compare-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.model-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.model-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 70px;
+}
+
+.model-input-compare {
+  flex: 1;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-family: 'Courier New', monospace;
+  border: 2px solid var(--border-primary);
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.model-input-compare:focus {
+  outline: none;
+  border-color: var(--orange-primary);
+  background: var(--bg-primary);
+  box-shadow: 0 0 0 3px var(--orange-glow);
+}
+
+.model-input-compare::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.compare-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .compare-settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
