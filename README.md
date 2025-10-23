@@ -47,7 +47,7 @@ The app maintains your original text while streaming corrections in real-time, c
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/cascade-edit.git
+   git clone https://github.com/MushroomFleet/cascade-edit.git
    cd cascade-edit
    ```
 
